@@ -6,7 +6,8 @@ const Schema = mongoose.Schema
 // mapping of different collection keys from mongo to different types in JS
 const CampgroundSchema = new Schema({
   title: String,
-  price: String,
+  image: String,
+  price: Number,
   description: String,
   location: String
 });
