@@ -69,7 +69,7 @@ app.post('/campgrounds', validateCampground, catchAsync(async (req, res, next) =
 
 // to show page of a specific campground ID
 app.get('/campgrounds/:id', catchAsync(async (req, res, next) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   if (!ObjectID.isValid(id)) {
     return next( new ExpressError('Incorrect ID', 400));
   }
@@ -81,12 +81,13 @@ app.get('/campgrounds/:id', catchAsync(async (req, res, next) => {
 }));
 
 app.get('/campgrounds/:id/edit', catchAsync(async (req, res) => {
-  const campground = await Campground.findById(req.params.id)
+  const {id} = req.params;
+  const campground = await Campground.findById(id)
   res.render('campgrounds/edit', {campground});
 }))
 
 // to edit/update campground info
-app.put('/campgrounds/:id', catchAsync(async (req, res) => {
+app.put('/campgrounds/:id', validateCampground, catchAsync(async (req, res) => {
   const { id } = req.params;
   const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
   res.redirect(`/campgrounds/${campground._id}`);
