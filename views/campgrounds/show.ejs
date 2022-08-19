@@ -10,8 +10,8 @@
       </div>
 
       <ul class="list-group list-group-flush">
-        <li class="list-group-item text-muted"><%= campground.location%></li>
-        <li class="list-group-item text-muted">$<%= campground.price%>/nigh</li>
+        <li class="list-group-item text-muted"><%= campground.location %></li>
+        <li class="list-group-item text-muted">$<%= campground.price %>/nigh</li>
       </ul>
 
       <div class="card-body">
@@ -24,7 +24,17 @@
         2 days ago
         <a href="/campgrounds">All Campgrounds</a>
       </div>
-
     </div>
+    <form class="" action="index.html" method="post">
+      <div class="mb-3">
+        <label for=""></label>
+        <input type="range" min="1" max="5" name="" value="">
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="body">Review</label>
+        <textarea class="form-control" name="review[body]" id="body"
+        rows="3" cols="30"></textarea>
+      </div>
+    </form>
   </div>
 </div>
