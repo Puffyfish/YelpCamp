@@ -8,20 +8,13 @@ const flash = require('connect-flash'); //
 
 const ExpressError = require('./utils/ExpressError');
 
-const reviewRoutes = require('./routes/reviews');
-const campgroundRoutes = require('./routes/campgrounds');
-const userRoutes = require('./routes/user');
-
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
-// mongoose.connect('mongodb://localhost:27017/yelp-camp', {
-//   useNewUrlParser: true,
-//   useCreateIndex: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false
-// });
+const reviewRoutes = require('./routes/reviews');
+const campgroundRoutes = require('./routes/campgrounds');
+const userRoutes = require('./routes/user');
 
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb://127.0.0.1/yelp-camp')
@@ -74,7 +67,7 @@ app.use( (req, res, next) => {
   next();
 })
 
-app.use('', userRoutes);
+app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/reviews', reviewRoutes);
 
@@ -85,7 +78,7 @@ app.get('/', (req, res) => {
 
 // app.all is for ALL requests made
 app.all('*', (req, res, next) => { // * means for any kind of path
-  next(new ExpressError('Page Not Found'), 404)
+  next(new ExpressError('Page Not Found', 404));
 })
 
 app.use((err, req, res, next) => {
