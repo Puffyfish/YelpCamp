@@ -1,7 +1,7 @@
 <%- layout('layout/boilerplate')%>
 <div class="row">
-  <div class="col-6 offset-3">
-    <div class="card mb-3">
+  <div class="row col-8 offset-2">
+    <div class="col card">
       <img src="<%= campground.image%>" class="card-img-top img-fluid" alt="...">
 
       <div class="card-body">
@@ -10,6 +10,7 @@
       </div>
 
       <ul class="list-group list-group-flush">
+        <li class="list-group-item text-muted">Submitted by: <%= campground.author.username %></li>
         <li class="list-group-item text-muted"><%= campground.location %></li>
         <li class="list-group-item text-muted">$<%= campground.price %>/nigh</li>
       </ul>
@@ -25,16 +26,21 @@
         <a href="/campgrounds">All Campgrounds</a>
       </div>
     </div>
-    <form class="" action="index.html" method="post">
-      <div class="mb-3">
-        <label for=""></label>
-        <input type="range" min="1" max="5" name="" value="">
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="body">Review</label>
-        <textarea class="form-control" name="review[body]" id="body"
-        rows="3" cols="30"></textarea>
-      </div>
-    </form>
+    <div class="col">
+      <form class="mb-3 validated form" novalidation action="/campgrounds/<%=campground._id%>/reviews" method="POST">
+        <h3>Leave a review</h3>
+        <div class="mb-3">
+          <label class="form-label" for="rating">Rating</label>
+          <input class="form-range" type="range" min="1" max="5" name="review[rating]">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="body">Review</label>
+          <textarea class="form-control" name="review[body]" id="body"
+          rows="3" cols="30"></textarea>
+        </div>
+        <button class="btn btn-success">Submit</button>
+      </form>
+    </div>
+    
   </div>
 </div>
